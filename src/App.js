@@ -29,6 +29,12 @@ class App extends Component {
     toggleComplete(index) {
         const todos = this.state.todos.slice();
         const todo = todos[index];
+
+        console.log("BEGIN DEBUG");
+        console.log(`todo = ${todo}`);
+        console.log(`todos Array:\n${todos}\n\n`);
+        console.log("END DEBUG");
+        todo.isCompleteted = todos.isCompleted;
         todo.isCompleted = todo.isCompleted ? false : true;
         this.setState({ todos: todos });
     }
@@ -38,7 +44,7 @@ class App extends Component {
             <div className="App">
                 <ul>
                     { this.state.todos.map( (todo, index) =>
-                    <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ this.toggleComplete } />
+                    <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ this.toggleComplete.bind(this) } />
                 )}
                 </ul>
                 <form onSubmit={ (e) => this.handleSDubmit(e) }>
